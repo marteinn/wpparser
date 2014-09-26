@@ -9,7 +9,7 @@ The library uses ElementTree to traverse through the export file.
 ## Usage
 
 	import wpparser
-	
+
 	data = wpparser.parse("./blog.wordpress.2014-09-26.xml")
 	>>> {"blog": {"tagline": "Tagline",...
 
@@ -56,8 +56,8 @@ It returns a well formatted dict, containing the following datatypes:
             }]
         }],
         "tags": [{
-        	"term_id": "1", 
-        	"slug": "bash", 
+        	"term_id": "1",
+        	"slug": "bash",
         	"name": "Bash"
         }],
         "posts": [{
@@ -112,4 +112,4 @@ Want to contribute? Awesome. Just send a pull request.
 
 ## License
 
-Genres is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+wpparser is released under the [MIT License](http://www.opensource.org/licenses/MIT).
