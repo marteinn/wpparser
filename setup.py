@@ -18,7 +18,9 @@ packages = [
 with open('README.md') as f:
     readme = f.read()
 
-requires = ["phpserialize"]
+install_requires = [
+    "phpserialize==1.3"
+]
 
 long_description = """
 wpparser parses wordpress export files and returns them as well formatted
@@ -43,7 +45,7 @@ setup(
     package_data={"": ["LICENSE",], "wpparser": ["*.txt"]},
     package_dir={"wpparser": "wpparser"},
     include_package_data=True,
-    install_requires=requires,
+    install_requires=install_requires,
     license="Apache 2.0",
     zip_safe=False,
     classifiers=(
@@ -54,6 +56,4 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7"
     ),
-    extras_require={
-    },
 )
