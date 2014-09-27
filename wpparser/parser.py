@@ -6,8 +6,9 @@ wpparser
 
 Load and parse the wp export file into a readable dictionary.
 """
-import phpserialize
+
 from StringIO import StringIO
+import phpserialize
 
 try:
     import xml.etree.cElementTree as ET
