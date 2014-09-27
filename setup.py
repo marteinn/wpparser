@@ -5,11 +5,7 @@ import os
 import sys
 
 import wpparser
-
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup
 
 if sys.argv[-1] == "publish":
     os.system("python setup.py sdist upload")
@@ -22,7 +18,7 @@ packages = [
 with open('README.md') as f:
     readme = f.read()
 
-requires = ["phpserialize==1.3"]
+requires = ["phpserialize"]
 
 long_description = """
 wpparser parses wordpress export files and returns them as well formatted
