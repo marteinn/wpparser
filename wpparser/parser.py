@@ -6,6 +6,8 @@ wpparser
 
 Load and parse the wp export file into a readable dictionary.
 """
+import phpserialize
+from StringIO import StringIO
 
 try:
     import xml.etree.cElementTree as ET
@@ -301,10 +303,34 @@ def _parse_posts(element):
             "tags": tags,
         }
 
+        post["postmeta"] = _parse_postmeta(item)
         post["comments"] = _parse_comments(item)
         posts.append(post)
 
     return posts
+
+
+def _parse_postmeta(element):
+    """
+    Retrive post metadata as a dictionary
+    """
+
+    metadata = {}
+    fields = element.findall("./{%s}postmeta" % WP_NAMESPACE)
+
+    for field in fields:
+        key = field.find("./{%s}meta_key" % WP_NAMESPACE).text
+        value = field.find("./{%s}meta_value" % WP_NAMESPACE).text
+
+        if key == "_wp_attachment_metadata":
+            stream = StringIO(value)
+            data = phpserialize.load(stream)
+            metadata["attachment_metadata"] = data
+
+        if key == "_wp_attached_file":
+            metadata["attached_file"] = value
+
+    return metadata
 
 
 def _parse_comments(element):

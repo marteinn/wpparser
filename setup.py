@@ -22,7 +22,7 @@ packages = [
 with open('README.md') as f:
     readme = f.read()
 
-requires = []
+requires = ["phpserialize==1.3"]
 
 long_description = """
 wpparser parses wordpress export files and returns them as well formatted
