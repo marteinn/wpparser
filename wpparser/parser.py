@@ -8,7 +8,6 @@ Load and parse the wp export file into a readable dictionary.
 """
 
 from StringIO import StringIO
-import phpserialize
 
 try:
     import xml.etree.cElementTree as ET
@@ -312,6 +311,8 @@ def _parse_posts(element):
 
 
 def _parse_postmeta(element):
+    import phpserialize
+
     """
     Retrive post metadata as a dictionary
     """
