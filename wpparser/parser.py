@@ -326,8 +326,11 @@ def _parse_postmeta(element):
 
         if key == "_wp_attachment_metadata":
             stream = StringIO(value)
-            data = phpserialize.load(stream)
-            metadata["attachment_metadata"] = data
+            try:
+                data = phpserialize.load(stream)
+                metadata["attachment_metadata"] = data
+            except ValueError, e:
+                pass
 
         if key == "_wp_attached_file":
             metadata["attached_file"] = value
