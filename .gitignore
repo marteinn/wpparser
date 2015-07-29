@@ -1,7 +1,4 @@
 *.pyc
-/lib
-/include
-/bin
 .DS_Store
 .*.swp
 tags
@@ -10,3 +7,4 @@ dist
 build
 .coverage
 *.egg-info/
+venv
