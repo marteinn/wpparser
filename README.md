@@ -2,7 +2,7 @@
 
 # wpparser
 
-Parse wordpress export files into  well formatted python dictionaries, for python 2.7+.
+This library parses Wordpress xml based exports into a simple python dictionary.
 
 
 ## How it works
@@ -104,6 +104,7 @@ It returns a well formatted dict, containing the following datatypes:
 ```
 
 ## Installation
+
 wpparser can easily be installed through pip.
 
     $ pip install wpparser

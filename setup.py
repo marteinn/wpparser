@@ -37,7 +37,7 @@ except ImportError:
 setup(
     name="wpparser",
     version=wpparser.__version__,
-    description="Parse WordPress export files into python dictionaries.",
+    description="Parse wordpress export files into a well formatted python dictionary",  # NOQA
     long_description=long_description,
     author="Martin Sandström",
     author_email="martin@marteinn.se",
