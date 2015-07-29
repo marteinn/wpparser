@@ -1,6 +1,9 @@
+[![Build Status](https://travis-ci.org/marteinn/wpparser.svg?branch=master)](https://travis-ci.org/marteinn/wpparser)
+
 # wpparser
 
 Parse wordpress export files into  well formatted python dictionaries, for python 2.7+.
+
 
 ## How it works
 
