@@ -3,50 +3,51 @@
 
 import os
 import sys
+import pip
+from pip.req import parse_requirements
+from setuptools import setup
 
 import wpparser
-from setuptools import setup
 
 if sys.argv[-1] == "publish":
     os.system("python setup.py sdist upload")
     sys.exit()
 
+
 packages = [
     "wpparser"
 ]
 
-with open('README.md') as f:
-    readme = f.read()
+# Handle requirements
+requires = parse_requirements("requirements/install.txt",
+                              session=pip.download.PipSession())
+install_requires = [str(ir.req) for ir in requires]
 
-install_requires = [
-    "phpserialize==1.3"
-]
+requires = parse_requirements("requirements/tests.txt",
+                              session=pip.download.PipSession())
+tests_require = [str(ir.req) for ir in requires]
 
-long_description = """
-wpparser parses wordpress export files and returns them as well formatted
-python dictionaries.
-
----
-
-%s
-
-""" % readme
-
+# Convert markdown to rst
+try:
+    from pypandoc import convert
+    long_description = convert('README.md', 'rst')
+except ImportError:
+    long_description = open('README.md').read()
 
 setup(
     name="wpparser",
     version=wpparser.__version__,
-    description="Parse WordPress export files into dictionaries.",
+    description="Parse WordPress export files into python dictionaries.",
     long_description=long_description,
     author="Martin Sandström",
     author_email="martin@marteinn.se",
     url="https://github.com/marteinn/wpparser",
     packages=packages,
-    package_data={"": ["LICENSE",], "wpparser": ["*.txt"]},
+    package_data={"": ["LICENSE", ], "wpparser": ["*.txt"]},
     package_dir={"wpparser": "wpparser"},
     include_package_data=True,
     install_requires=install_requires,
-    license="Apache 2.0",
+    license="MIT",
     zip_safe=False,
     classifiers=(
         "Development Status :: 4 - Beta",

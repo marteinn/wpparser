@@ -1,0 +1,2 @@
+-r install.txt
+pytest==2.6.2
