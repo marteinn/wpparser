@@ -1,6 +1,6 @@
 # wpparser
 
-wpparser parses wordpress export files and returns them as well formatted python dictionaries, for python 2.7+.
+Parse wordpress export files into  well formatted python dictionaries, for python 2.7+.
 
 ## How it works
 
