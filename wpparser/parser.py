@@ -29,6 +29,10 @@ def parse(path):
 
     Example:
 
+        wpparser.parse("./blog.wordpress.2014-09-26.xml")
+
+    Will return:
+
         {
         "blog": {
             "tagline": "Tagline",
