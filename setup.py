@@ -6,6 +6,7 @@ import sys
 import pip
 from pip.req import parse_requirements
 from setuptools import setup
+from pypandoc import convert
 
 import wpparser
 
@@ -28,11 +29,7 @@ requires = parse_requirements("requirements/tests.txt",
 tests_require = [str(ir.req) for ir in requires]
 
 # Convert markdown to rst
-try:
-    from pypandoc import convert
-    long_description = convert('README.md', 'rst')
-except ImportError:
-    long_description = open('README.md').read()
+long_description = convert('README.md', 'rst')
 
 setup(
     name="wpparser",
@@ -50,11 +47,14 @@ setup(
     license="MIT",
     zip_safe=False,
     classifiers=(
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Natural Language :: English",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7"
+        "Programming Language :: Python :: 3.2",
+        "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4"
     ),
 )

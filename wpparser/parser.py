@@ -7,7 +7,10 @@ wpparser
 Load and parse the wp export file into a readable dictionary.
 """
 
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import BytesIO as StringIO
 
 try:
     import xml.etree.cElementTree as ET
@@ -329,12 +332,14 @@ def _parse_postmeta(element):
         value = field.find("./{%s}meta_value" % WP_NAMESPACE).text
 
         if key == "_wp_attachment_metadata":
-            stream = StringIO(value)
+            stream = StringIO(value.encode())
             try:
                 data = phpserialize.load(stream)
                 metadata["attachment_metadata"] = data
-            except ValueError, e:
+            except ValueError as e:
                 pass
+            except Exception as e:
+                raise(e)
 
         if key == "_wp_attached_file":
             metadata["attached_file"] = value

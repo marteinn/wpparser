@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/marteinn/wpparser.svg?branch=master)](https://travis-ci.org/marteinn/wpparser)
+[![PyPI version](https://badge.fury.io/py/wpparser.svg)](http://badge.fury.io/py/wpparser)
 
 # wpparser
 
