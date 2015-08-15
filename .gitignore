@@ -7,4 +7,4 @@ dist
 build
 .coverage
 *.egg-info/
-venv
+venv*
