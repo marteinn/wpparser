@@ -12,11 +12,11 @@ readable dictionary.
 """
 
 __title__ = "wpparser"
-__version__ = "1.1.1"
-__build__ = 111
+__version__ = "1.1.2"
+__build__ = 112
 __author__ = "Martin Sandström"
 __license__ = "MIT"
-__copyright__ = "Copyright 2014-2015 Martin Sandström"
+__copyright__ = "Copyright 2014-2020 Martin Sandström"
 
 
 from .parser import parse  # NOQA
