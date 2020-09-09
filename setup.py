@@ -12,6 +12,15 @@ if sys.argv[-1] == "publish":
     os.system("python setup.py sdist upload")
     sys.exit()
 
+
+test_requirements = [
+    "pytest>=3",
+]
+
+requires = [
+    "phpserialize>=1.3",
+]
+
 # Convert markdown to rst
 try:
     from pypandoc import convert
@@ -31,9 +40,8 @@ setup(
     package_data={"": ["LICENSE", ], "wpparser": ["*.txt"]},
     package_dir={"wpparser": "wpparser"},
     include_package_data=True,
-    install_requires=[
-        "phpserialize>=1.3"
-    ],
+    install_requires=requires,
+    tests_require=test_requirements,
     license="MIT",
     zip_safe=False,
     classifiers=(
