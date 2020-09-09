@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import os
+import re
 import sys
-
 from setuptools import find_packages, setup
 
 import wpparser
@@ -21,6 +21,12 @@ requires = [
     "phpserialize>=1.3",
 ]
 
+version = ""
+with open("wpparser/__init__.py", "r") as fd:
+    version = re.search(
+        r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', fd.read(), re.MULTILINE
+    ).group(1)
+
 # Convert markdown to rst
 try:
     from pypandoc import convert
@@ -30,7 +36,7 @@ except:
 
 setup(
     name="wpparser",
-    version=wpparser.__version__,
+    version=version,
     description="Parse wordpress export files into a well formatted python dictionary",  # NOQA
     long_description=long_description,
     author="Martin Sandström",
@@ -44,7 +50,7 @@ setup(
     tests_require=test_requirements,
     license="MIT",
     zip_safe=False,
-    classifiers=(
+    classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Natural Language :: English",
@@ -52,7 +58,6 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8"
-    ),
-    python_requires=">=2.7",
+        "Programming Language :: Python :: 3.8",
+    ],
 )
