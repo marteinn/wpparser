@@ -17,6 +17,9 @@ try:
 except ImportError:
     import xml.etree.ElementTree as ET
 
+import phpserialize
+
+
 
 # Namespaces used by ElementTree with parsing wp xml.
 EXCERPT_NAMESPACE = "http://wordpress.org/export/1.2/excerpt/"
@@ -318,8 +321,6 @@ def _parse_posts(element):
 
 
 def _parse_postmeta(element):
-    import phpserialize
-
     """
     Retrive post metadata as a dictionary
     """
@@ -339,10 +340,12 @@ def _parse_postmeta(element):
             except ValueError as e:
                 pass
             except Exception as e:
-                raise(e)
+                raise e
 
-        if key == "_wp_attached_file":
+        elif key == "_wp_attached_file":
             metadata["attached_file"] = value
+        else:
+            metadata[key] = value
 
     return metadata
 
