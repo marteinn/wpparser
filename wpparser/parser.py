@@ -19,8 +19,6 @@ except ImportError:
 
 import phpserialize
 
-
-
 # Namespaces used by ElementTree with parsing wp xml.
 EXCERPT_NAMESPACE = "http://wordpress.org/export/1.2/excerpt/"
 CONTENT_NAMESPACE = "http://purl.org/rss/1.0/modules/content/"
@@ -161,7 +159,7 @@ def _parse_authors(element):
         first_name = item.find("./{%s}author_first_name" % WP_NAMESPACE).text
         last_name = item.find("./{%s}author_last_name" % WP_NAMESPACE).text
         display_name = item.find(
-            "./{%s}author_display_name" % WP_NAMESPACE).text
+                "./{%s}author_display_name" % WP_NAMESPACE).text
 
         authors.append({
             "login": login,
