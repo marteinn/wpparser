@@ -278,16 +278,12 @@ def _parse_posts(element):
         post_password = item.find("./{%s}post_password" % WP_NAMESPACE).text
         category_items = item.findall("./category")
 
-        categories = []
-        tags = []
+        category_domains = {}
 
         for category_item in category_items:
-            if category_item.attrib["domain"] == "category":
-                item_list = categories
-            else:
-                item_list = tags
-
-            item_list.append(category_item.attrib["nicename"])
+            if category_item.attrib["domain"] not in category_domains:
+                category_domains[category_item.attrib["domain"]] = []
+            category_domains[category_item.attrib["domain"]].append({'nicename': category_item.attrib["nicename"], 'text': category_item.text})
 
         post = {
             "title": title,
@@ -306,12 +302,14 @@ def _parse_posts(element):
             "menu_order": menu_order,
             "post_type": post_type,
             "post_name": post_name,
-            "categories": categories,
             "is_sticky": is_sticky,
             "ping_status": ping_status,
             "post_password": post_password,
-            "tags": tags,
         }
+
+        # Include all categories with a prefix inorder to avoid collisions
+        for k, v in category_domains.items():
+            post[f'category_{k}'] = v
 
         post["postmeta"] = _parse_postmeta(item)
         post["comments"] = _parse_comments(item)
