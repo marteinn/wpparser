@@ -124,8 +124,8 @@ def _parse_blog(element):
     title = element.find("./title").text
     tagline = element.find("./description").text
     language = element.find("./language").text
-    site_url = element.find("./{%s}base_site_url" % WP_NAMESPACE).text
-    blog_url = element.find("./{%s}base_blog_url" % WP_NAMESPACE).text
+    site_url = element.find(f"./{{{WP_NAMESPACE}}}base_site_url").text
+    blog_url = element.find(f"./{{{WP_NAMESPACE}}}base_blog_url").text
 
     return {
         "title": title,
@@ -142,15 +142,14 @@ def _parse_authors(element):
     """
 
     authors = []
-    items = element.findall("./{%s}author" % WP_NAMESPACE)
+    items = element.findall(f"./{{{WP_NAMESPACE}}}author")
 
     for item in items:
-        login = item.find("./{%s}author_login" % WP_NAMESPACE).text
-        email = item.find("./{%s}author_email" % WP_NAMESPACE).text
-        first_name = item.find("./{%s}author_first_name" % WP_NAMESPACE).text
-        last_name = item.find("./{%s}author_last_name" % WP_NAMESPACE).text
-        display_name = item.find(
-                "./{%s}author_display_name" % WP_NAMESPACE).text
+        login = item.find(f"./{{{WP_NAMESPACE}}}author_login").text
+        email = item.find(f"./{{{WP_NAMESPACE}}}author_email").text
+        first_name = item.find(f"./{{{WP_NAMESPACE}}}author_first_name").text
+        last_name = item.find(f"./{{{WP_NAMESPACE}}}author_last_name").text
+        display_name = item.find(f"./{{{WP_NAMESPACE}}}author_display_name").text
 
         authors.append({
             "login": login,
@@ -168,13 +167,13 @@ def _parse_categories(element):
     Returns a list with categories with relations.
     """
     reference = {}
-    items = element.findall("./{%s}category" % WP_NAMESPACE)
+    items = element.findall(f"./{{{WP_NAMESPACE}}}category")
 
     for item in items:
-        term_id = item.find("./{%s}term_id" % WP_NAMESPACE).text
-        nicename = item.find("./{%s}category_nicename" % WP_NAMESPACE).text
-        name = item.find("./{%s}cat_name" % WP_NAMESPACE).text
-        parent = item.find("./{%s}category_parent" % WP_NAMESPACE).text
+        term_id = item.find(f"./{{{WP_NAMESPACE}}}term_id").text
+        nicename = item.find(f"./{{{WP_NAMESPACE}}}category_nicename").text
+        name = item.find(f"./{{{WP_NAMESPACE}}}cat_name").text
+        parent = item.find(f"./{{{WP_NAMESPACE}}}category_parent").text
 
         category = {
             "term_id": term_id,
@@ -219,12 +218,12 @@ def _parse_tags(element):
     """
 
     tags = []
-    items = element.findall("./{%s}tag" % WP_NAMESPACE)
+    items = element.findall(f"./{{{WP_NAMESPACE}}}tag")
 
     for item in items:
-        term_id = item.find("./{%s}term_id" % WP_NAMESPACE).text
-        slug = item.find("./{%s}tag_slug" % WP_NAMESPACE).text
-        name = item.find("./{%s}tag_name" % WP_NAMESPACE).text
+        term_id = item.find(f"./{{{WP_NAMESPACE}}}term_id").text
+        slug = item.find(f"./{{{WP_NAMESPACE}}}tag_slug").text
+        name = item.find(f"./{{{WP_NAMESPACE}}}tag_name").text
 
         tag = {
             "term_id": term_id,
@@ -249,22 +248,22 @@ def _parse_posts(element):
         title = item.find("./title").text
         link = item.find("./link").text
         pub_date = item.find("./pubDate").text
-        creator = item.find("./{%s}creator" % DC_NAMESPACE).text
+        creator = item.find(f"./{{{DC_NAMESPACE}}}creator").text
         guid = item.find("./guid").text
         description = item.find("./description").text
-        content = item.find("./{%s}encoded" % CONTENT_NAMESPACE).text
-        excerpt = item.find("./{%s}encoded" % EXCERPT_NAMESPACE).text
-        post_id = item.find("./{%s}post_id" % WP_NAMESPACE).text
-        post_date = item.find("./{%s}post_date" % WP_NAMESPACE).text
-        post_date_gmt = item.find("./{%s}post_date_gmt" % WP_NAMESPACE).text
-        status = item.find("./{%s}status" % WP_NAMESPACE).text
-        post_parent = item.find("./{%s}post_parent" % WP_NAMESPACE).text
-        menu_order = item.find("./{%s}menu_order" % WP_NAMESPACE).text
-        post_type = item.find("./{%s}post_type" % WP_NAMESPACE).text
-        post_name = item.find("./{%s}post_name" % WP_NAMESPACE).text
-        is_sticky = item.find("./{%s}is_sticky" % WP_NAMESPACE).text
-        ping_status = item.find("./{%s}ping_status" % WP_NAMESPACE).text
-        post_password = item.find("./{%s}post_password" % WP_NAMESPACE).text
+        content = item.find(f"./{{{CONTENT_NAMESPACE}}}encoded").text
+        excerpt = item.find(f"./{{{EXCERPT_NAMESPACE}}}encoded").text
+        post_id = item.find(f"./{{{WP_NAMESPACE}}}post_id").text
+        post_date = item.find(f"./{{{WP_NAMESPACE}}}post_date").text
+        post_date_gmt = item.find(f"./{{{WP_NAMESPACE}}}post_date_gmt").text
+        status = item.find(f"./{{{WP_NAMESPACE}}}status").text
+        post_parent = item.find(f"./{{{WP_NAMESPACE}}}post_parent").text
+        menu_order = item.find(f"./{{{WP_NAMESPACE}}}menu_order").text
+        post_type = item.find(f"./{{{WP_NAMESPACE}}}post_type").text
+        post_name = item.find(f"./{{{WP_NAMESPACE}}}post_name").text
+        is_sticky = item.find(f"./{{{WP_NAMESPACE}}}is_sticky").text
+        ping_status = item.find(f"./{{{WP_NAMESPACE}}}ping_status").text
+        post_password = item.find(f"./{{{WP_NAMESPACE}}}post_password").text
         category_items = item.findall("./category")
 
         category_domains = {}
@@ -309,15 +308,15 @@ def _parse_posts(element):
 
 def _parse_postmeta(element):
     """
-    Retrive post metadata as a dictionary
+    Retrieve post metadata as a dictionary
     """
 
     metadata = {}
-    fields = element.findall("./{%s}postmeta" % WP_NAMESPACE)
+    fields = element.findall(f"./{{{WP_NAMESPACE}}}postmeta")
 
     for field in fields:
-        key = field.find("./{%s}meta_key" % WP_NAMESPACE).text
-        value = field.find("./{%s}meta_value" % WP_NAMESPACE).text
+        key = field.find(f"./{{{WP_NAMESPACE}}}meta_key").text
+        value = field.find(f"./{{{WP_NAMESPACE}}}meta_value").text
 
         if key == "_wp_attachment_metadata":
             stream = StringIO(value.encode())
@@ -343,21 +342,21 @@ def _parse_comments(element):
     """
 
     comments = []
-    items = element.findall("./{%s}comment" % WP_NAMESPACE)
+    items = element.findall(f"./{{{WP_NAMESPACE}}}comment")
 
     for item in items:
-        comment_id = item.find("./{%s}comment_id" % WP_NAMESPACE).text
-        author = item.find("./{%s}comment_author" % WP_NAMESPACE).text
-        email = item.find("./{%s}comment_author_email" % WP_NAMESPACE).text
-        author_url = item.find("./{%s}comment_author_url" % WP_NAMESPACE).text
-        author_ip = item.find("./{%s}comment_author_IP" % WP_NAMESPACE).text
-        date = item.find("./{%s}comment_date" % WP_NAMESPACE).text
-        date_gmt = item.find("./{%s}comment_date_gmt" % WP_NAMESPACE).text
-        content = item.find("./{%s}comment_content" % WP_NAMESPACE).text
-        approved = item.find("./{%s}comment_approved" % WP_NAMESPACE).text
-        comment_type = item.find("./{%s}comment_type" % WP_NAMESPACE).text
-        parent = item.find("./{%s}comment_parent" % WP_NAMESPACE).text
-        user_id = item.find("./{%s}comment_user_id" % WP_NAMESPACE).text
+        comment_id = item.find(f"./{{{WP_NAMESPACE}}}comment_id").text
+        author = item.find(f"./{{{WP_NAMESPACE}}}comment_author").text
+        email = item.find(f"./{{{WP_NAMESPACE}}}comment_author_email").text
+        author_url = item.find(f"./{{{WP_NAMESPACE}}}comment_author_url").text
+        author_ip = item.find(f"./{{{WP_NAMESPACE}}}comment_author_IP").text
+        date = item.find(f"./{{{WP_NAMESPACE}}}comment_date").text
+        date_gmt = item.find(f"./{{{WP_NAMESPACE}}}comment_date_gmt").text
+        content = item.find(f"./{{{WP_NAMESPACE}}}comment_content").text
+        approved = item.find(f"./{{{WP_NAMESPACE}}}comment_approved").text
+        comment_type = item.find(f"./{{{WP_NAMESPACE}}}comment_type").text
+        parent = item.find(f"./{{{WP_NAMESPACE}}}comment_parent").text
+        user_id = item.find(f"./{{{WP_NAMESPACE}}}comment_user_id").text
 
         comment = {
             "id": comment_id,
