@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 wpparser
 ---
@@ -7,15 +5,8 @@ wpparser
 Load and parse the wp export file into a readable dictionary.
 """
 
-try:
-    from StringIO import StringIO
-except ImportError:
-    from io import BytesIO as StringIO
-
-try:
-    import xml.etree.cElementTree as ET
-except ImportError:
-    import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ET
+from io import BytesIO as StringIO
 
 import phpserialize
 
