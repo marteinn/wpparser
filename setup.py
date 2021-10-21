@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import os
 import re
@@ -29,8 +28,8 @@ with open("wpparser/__init__.py", "r") as fd:
 
 # Convert markdown to rst
 try:
-    from pypandoc import convert
-    long_description = convert("README.md", "rst")
+    from pypandoc import convert_file
+    long_description = convert_file("README.md", "rst")
 except:
     long_description = ""
 
@@ -56,8 +55,9 @@ setup(
         "Natural Language :: English",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ],
 )
