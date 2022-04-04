@@ -3,7 +3,7 @@
 
 # wpparser
 
-This library parses Wordpress xml based exports into a simple python dictionary.
+This library parses WordPress xml based exports into a simple python dictionary.
 
 
 ## How it works
@@ -39,7 +39,7 @@ It returns a well formatted dict, containing the following datatypes:
         "language": "en-US",
         "title": "Marteinn / Blog"
     },
-    "authors: [{
+    "authors": [{
         "login": "admin",
         "last_name": None,
         "display_name": "admin",
