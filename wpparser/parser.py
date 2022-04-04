@@ -260,6 +260,8 @@ def _parse_posts(element: ET.Element) -> List[Dict[str, str]]:
         post_id = _get_wp_element(item, "post_id")
         post_date = _get_wp_element(item, "post_date")
         post_date_gmt = _get_wp_element(item, "post_date_gmt")
+        post_modified = _get_wp_element(item, "post_modified")
+        post_modified_gmt = _get_wp_element(item, "post_modified_gmt")
         status = _get_wp_element(item, "status")
         post_parent = _get_wp_element(item, "post_parent")
         menu_order = _get_wp_element(item, "menu_order")
@@ -289,6 +291,8 @@ def _parse_posts(element: ET.Element) -> List[Dict[str, str]]:
             "post_id": post_id,
             "post_date": post_date,
             "post_date_gmt": post_date_gmt,
+            "post_modified": post_modified,
+            "post_modified_gmt": post_modified_gmt,
             "status": status,
             "post_parent": post_parent,
             "menu_order": menu_order,
