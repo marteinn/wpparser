@@ -344,9 +344,6 @@ def _parse_postmeta(element):
         if key == "_wp_attached_file":
             metadata["attached_file"] = value
 
-        if key == "_thumbnail_id":
-            metadata["thumbnail_id"] = value
-
     return metadata
 
 
