@@ -126,7 +126,7 @@ def parse(path):
 
 def _parse_blog(element):
     """
-    Parse and return genral blog data (title, tagline etc).
+    Parse and return general blog data (title, tagline etc).
     """
 
     title = element.find("./title").text
@@ -218,7 +218,7 @@ def _build_category_tree(slug, reference=None, items=None):
 
 def _parse_tags(element):
     """
-    Retrieves and parses tags into a array/dict.
+    Retrieves and parses tags into an array/dict.
 
     Example:
 
@@ -274,7 +274,6 @@ def _parse_posts(element):
         ping_status = item.find("./{%s}ping_status" % WP_NAMESPACE).text
         post_password = item.find("./{%s}post_password" % WP_NAMESPACE).text
         category_items = item.findall("./category")
-        # thumbnail_id = item.find("./{%s}_thumbnail_id" % WP_NAMESPACE).text
 
         categories = []
         tags = []
@@ -287,32 +286,13 @@ def _parse_posts(element):
 
             item_list.append(category_item.attrib["nicename"])
 
-        post = {
-            "title": title,
-            "link": link,
-            "pub_date": pub_date,
-            "creator": creator,
-            "guid": guid,
-            "description": description,
-            "content": content,
-            "excerpt": excerpt,
-            "post_id": post_id,
-            "post_date": post_date,
-            "post_date_gmt": post_date_gmt,
-            "status": status,
-            "post_parent": post_parent,
-            "menu_order": menu_order,
-            "post_type": post_type,
-            "post_name": post_name,
-            "categories": categories,
-            "is_sticky": is_sticky,
-            "ping_status": ping_status,
-            "post_password": post_password,
-            "tags": tags,
-        }
+        post = {"title": title, "link": link, "pub_date": pub_date, "creator": creator, "guid": guid,
+                "description": description, "content": content, "excerpt": excerpt, "post_id": post_id,
+                "post_date": post_date, "post_date_gmt": post_date_gmt, "status": status, "post_parent": post_parent,
+                "menu_order": menu_order, "post_type": post_type, "post_name": post_name, "categories": categories,
+                "is_sticky": is_sticky, "ping_status": ping_status, "post_password": post_password, "tags": tags,
+                "postmeta": _parse_postmeta(item), "comments": _parse_comments(item)}
 
-        post["postmeta"] = _parse_postmeta(item)
-        post["comments"] = _parse_comments(item)
         posts.append(post)
 
     return posts
@@ -322,7 +302,7 @@ def _parse_postmeta(element):
     import phpserialize
 
     """
-    Retrive post metadata as a dictionary
+    Retrieve post metadata as a dictionary
     """
     serialized_meta = {
         "_wp_attachment_metadata": "attachment_metadata",
