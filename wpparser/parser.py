@@ -274,6 +274,7 @@ def _parse_posts(element):
         ping_status = item.find("./{%s}ping_status" % WP_NAMESPACE).text
         post_password = item.find("./{%s}post_password" % WP_NAMESPACE).text
         category_items = item.findall("./category")
+        # thumbnail_id = item.find("./{%s}_thumbnail_id" % WP_NAMESPACE).text
 
         categories = []
         tags = []
@@ -323,7 +324,10 @@ def _parse_postmeta(element):
     """
     Retrive post metadata as a dictionary
     """
-
+    serialized_meta = {
+        "_wp_attachment_metadata": "attachment_metadata",
+        "um_content_restriction": "um_content_restriction"
+    }
     metadata = {}
     fields = element.findall("./{%s}postmeta" % WP_NAMESPACE)
 
@@ -331,18 +335,17 @@ def _parse_postmeta(element):
         key = field.find("./{%s}meta_key" % WP_NAMESPACE).text
         value = field.find("./{%s}meta_value" % WP_NAMESPACE).text
 
-        if key == "_wp_attachment_metadata":
+        if key in serialized_meta:
             stream = StringIO(value.encode())
             try:
                 data = phpserialize.load(stream)
-                metadata["attachment_metadata"] = data
+                metadata[serialized_meta[key]] = {k.decode('utf-8'): v for k, v in data.items()}
             except ValueError as e:
                 pass
             except Exception as e:
                 raise e
-
-        if key == "_wp_attached_file":
-            metadata["attached_file"] = value
+        else:
+            metadata[key] = value
 
     return metadata
 
