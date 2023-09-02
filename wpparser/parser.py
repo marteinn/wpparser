@@ -339,7 +339,7 @@ def _parse_postmeta(element):
             except ValueError as e:
                 pass
             except Exception as e:
-                raise(e)
+                raise e
 
         if key == "_wp_attached_file":
             metadata["attached_file"] = value
